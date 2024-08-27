@@ -1,0 +1,9 @@
+server:
+  port: 8092
+spring:
+  application:
+    name: ServiceTwo
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848

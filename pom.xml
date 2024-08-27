@@ -28,6 +28,12 @@
         <java.version>17</java.version>
     </properties>
 
+    <modules>
+        <module>gateway</module>
+        <module>ServiceOne</module>
+        <module>ServiceTwo</module>
+    </modules>
+
     <dependencyManagement>
         <dependencies>
             <dependency>

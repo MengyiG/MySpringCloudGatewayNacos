@@ -8,8 +8,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>ServiceOne</artifactId>
-    <description>ServiceOne</description>
+    <artifactId>ServiceTwo</artifactId>
+    <description>ServiceTwo</description>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
