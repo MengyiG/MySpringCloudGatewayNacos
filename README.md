@@ -37,8 +37,9 @@ Before setup:
 * gateway: http://localhost:8090/gateway
 
 After setup:
-* Service 1: http://localhost:8092/index1
-* Service 2: http://localhost:8091/index2
+Both service 1 and service2 are routing through gateway.
+* Service 1: http://localhost:8090/service1/index1
+* Service 2: http://localhost:8090/service2/index2
 
 ## Benefits
 ### Service Discovery
