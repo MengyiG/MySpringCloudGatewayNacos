@@ -14,3 +14,4 @@ spring:
         file-extension: yml
         group: DEFAULT_GROUP
         prefix: ${spring.application.name}
+        import-check.enabled: false
