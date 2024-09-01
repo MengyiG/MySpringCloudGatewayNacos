@@ -101,15 +101,15 @@ Both service 1 and service2 are routing through gateway and can be managed by Na
 ![Nacos Screenshot](img.png)
 
 ## Usage
-### Service Registration:
+#### Service Registration:
 Services like ServiceOne and ServiceTwo will automatically register themselves with Nacos. The gateway will use Nacos to discover these services dynamically, meaning we don't have to hardcode service endpoints in the gateway configuration, enabling microservices to find and communicate with each other dynamically.
-### Service Discovery:
+####  Service Discovery:
 Other microservices can query the Nacos server to find the registered instances of a service. This allows for dynamic service discovery, even in an environment where service instances might be added or removed frequently.
-### Load Balancing: 
+#### Load Balancing: 
 Nacos will enable load balancing across multiple instances of a service. If ServiceOne or ServiceTwo is scaled horizontally, the gateway will distribute traffic evenly across all available instances without any additional configuration.
-### Centralized Configuration: 
+####  Centralized Configuration: 
 We can manage the gateway's routes and filters centrally in Nacos. If we need to change a route, add a new service, or update filtering rules, we can do so directly in Nacos without redeploying the gateway.
-### Dynamic Updates: 
+####  Dynamic Updates: 
 Changes made in Nacos are propagated to the gateway in real-time. For example, if we update the routing configuration in Nacos, the gateway will automatically pick up the changes without needing a restart.
 ### Monitoring and Management:
 Use the Nacos console to monitor registered services, their health status, and perform management tasks like deregistration.
