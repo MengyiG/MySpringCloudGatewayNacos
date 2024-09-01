@@ -1,13 +1,72 @@
 # Spring Gateway and Nacos Service Discovery
 
-This project is to check how to use nacos to achieve  Service Discovery and Dynamic Configuration Management
+This project is to check how to use nacos to achieve  Service Discovery and Dynamic Configuration Management.
+A simplified diagram of this demo project:
+~~~~
+
+           +-----------------+
+           |     Gateway      |
+           +-----------------+
+                   |
+                   v
+           +-----------------+
+           |  Nacos Server    |
+           +-----------------+
+            /               \
+           v                 v
++----------------+   +----------------+
+|   ServiceOne   |   |   ServiceTwo    |
++----------------+   +----------------+
+
+~~~~
+- Gateway: The entry point for client requests, which routes requests to the appropriate services.
+- Nacos Server: The central service discovery component where all services are registered. The Gateway uses Nacos to discover and route to ServiceOne or ServiceTwo.
+- ServiceOne and ServiceTwo: Two microservices registered with Nacos. They are discovered by the Gateway through Nacos.
 
 ## Implementation Steps
 1. Set up [Nacos](https://nacos.io/en-us/docs/v2/quickstart/quick-start.html) Server. 
    - the default port is [8848](http://localhost:8848/nacos).
    - [video tutorial](https://www.bilibili.com/video/BV1WZ4y1w7ww/?p=2&vd_source=d216e0483cb2bc8d1140b35f1674e41d)
-2. Add Dependencies to pom.xml.
-3. Configure gateway.yml in Nacos.
+2. Add Dependencies to parent pom.xml.
+   ~~~~
+   <dependency>
+       <groupId>com.alibaba.cloud</groupId>
+       <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+       <version>2.1.0.RELEASE</version>
+       <type>pom</type>
+       <scope>import</scope>
+   </dependency>
+   ~~~~
+3. Add Dependencies to micro services
+   ~~~~
+   <dependency>
+       <groupId>com.alibaba.cloud</groupId>
+       <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+   </dependency>
+   ~~~~
+4. Rename application.properties to bootstrap.yml and add configurations to gateway:
+   ~~~~
+   server:
+     port: 8090
+   spring:
+     application:
+   name: gateway // will be used in step 5 to configure nacos server
+     profiles:
+   active: dev
+     cloud:
+       nacos:
+         discovery:
+           server-addr: localhost:8848
+           locator:
+             lower-case-service-id: true
+         config:
+           server-addr: localhost:8848
+           file-extension: yml
+           group: DEFAULT_GROUP
+           prefix: ${spring.application.name}
+           import-check.enabled: false
+   ~~~~
+5. Configure gateway.yml in Nacos. The configuration file should be in the format of .yml and the name comes from the application name in step 4. 
 ![img_1.png](img_1.png)
     ~~~~
     spring:
